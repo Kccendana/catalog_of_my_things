@@ -23,9 +23,7 @@
 
 # 📖 Catalog Of My Things <a name="about-project"></a>
 
-
-
-Catalog Of My Things is an .....
+Catalog Of My Things is Ruby console App used with OOP that can keep records of item,book, musics, Movies.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -51,7 +49,7 @@ Catalog Of My Things is an .....
 
 - Ruby installed on your system
 
-## Installation <a name="install"> 
+## Installation <a name="install">
 
 1. Clone this repository to your local machine:
 
