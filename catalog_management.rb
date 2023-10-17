@@ -4,5 +4,6 @@ class Catalog_management
   def initialize
     @items = []
   end
+  
 
 end
