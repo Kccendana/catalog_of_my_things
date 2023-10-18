@@ -1,13 +1,13 @@
 [
   {
-    "id": 790,
-    "genre": "#<Genres:0x00000211fd4b0378>",
-    "author": "JK Rowling",
-    "label": "Harry Potter",
-    "source": "Kv Lib",
-    "publisher": "Kathy Pub",
-    "published_date": "2022-12-25",
-    "cover_state": "good",
+    "id": 522,
+    "genre": "#<Genres:0x000002e19bcd7f60>",
+    "author": "RES",
+    "label": "RE",
+    "source": "Yours",
+    "publisher": "2020-02-2",
+    "published_date": "2020-02-20",
+    "cover_state": "bad",
     "can_be_archived": false
   }
 ]
