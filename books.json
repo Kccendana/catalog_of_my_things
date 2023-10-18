@@ -1,0 +1,13 @@
+[
+  {
+    "id": 790,
+    "genre": "#<Genres:0x00000211fd4b0378>",
+    "author": "JK Rowling",
+    "label": "Harry Potter",
+    "source": "Kv Lib",
+    "publisher": "Kathy Pub",
+    "published_date": "2022-12-25",
+    "cover_state": "good",
+    "can_be_archived": false
+  }
+]
