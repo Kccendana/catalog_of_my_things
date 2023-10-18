@@ -50,27 +50,39 @@ class Menu
 
   def add_music_album
     puts "\nAdding Music Album"
-    print 'Enter the Genre name: '
-    genre_name = gets.chomp
+    genre_name = use_genre_name
     genre = @catalog_management.genres.find { |g| g.name == genre_name }
+
     if genre.nil?
       puts "\n#{RED}Genre does not exist, create it first before adding a music album."
     else
-      print 'Enter the author: '
-      author = gets.chomp
-      print 'Enter the label: '
-      label = gets.chomp
-      print 'Enter the source: '
-      source = gets.chomp
-      print 'Enter the published date: '
-      published_date = gets.chomp
-      print 'Is it on Spotify? (true/false): '
-      on_spotify = gets.chomp.downcase == 'true'
-      music_album = MusicAlbum.new(genre, author, label, source, published_date, on_spotify)
+      author, label, source, published_date, on_spotify = use_music_album_details
+      music_album = MusicAlbum.new(MusicAlbum::MusicAlbumParams.new(genre, author, label, source, published_date,
+                                                                    on_spotify))
       @catalog_management.add_music_album(music_album)
       @catalog_management.save_items_to_json('music_albums.json')
       puts "\n#{GREEN}Music Album added successfully!"
     end
+  end
+
+  def use_genre_name
+    print 'Enter the Genre name: '
+    gets.chomp
+  end
+
+  def use_music_album_details
+    print 'Enter the author: '
+    author = gets.chomp
+    print 'Enter the label: '
+    label = gets.chomp
+    print 'Enter the source: '
+    source = gets.chomp
+    print 'Enter the published date: '
+    published_date = gets.chomp
+    print 'Is it on Spotify? (true/false): '
+    on_spotify = gets.chomp.downcase == 'true'
+
+    [author, label, source, published_date, on_spotify]
   end
 
   def add_genre

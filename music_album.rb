@@ -3,9 +3,11 @@ require_relative 'inc_helper'
 class MusicAlbum < Items
   attr_accessor :on_spotify
 
-  def initialize(genre, author, label, source, published_date, on_spotify)
-    super(genre, author, label, source, published_date)
-    @on_spotify = on_spotify
+  MusicAlbumParams = Struct.new(:genre, :author, :label, :source, :published_date, :on_spotify)
+
+  def initialize(music_params)
+    super(music_params.genre, music_params.author, music_params.label, music_params.source, music_params.published_date)
+    @on_spotify = music_params.on_spotify
   end
 
   def can_be_archived?
@@ -27,6 +29,7 @@ class MusicAlbum < Items
   def self.from_json(json_str)
     data = JSON.parse(json_str)
     genre = Genres.new(data['genre'])
-    new(genre, data['author'], data['label'], data['source'], data['published_date'], data['on_spotify'])
+    new(MusicAlbumParams.new(genre, data['author'], data['label'], data['source'], data['published_date'],
+                             data['on_spotify']))
   end
 end

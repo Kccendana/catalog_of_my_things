@@ -1,5 +1,5 @@
 require_relative 'inc_helper'
-class Catalog_management
+class CatalogManagement
   attr_accessor :items, :genres
 
   def initialize
@@ -21,7 +21,7 @@ class Catalog_management
         json_data = File.read(filename)
         data = JSON.parse(json_data, symbolize_names: true)
         data.each do |item_data|
-          music_album = MusicAlbum.from_json(item_data.to_json)
+          music_album = MusicAlbum.from_json(item_data.to_json) # Pass a JSON string as an argument
           @items << music_album
         end
       rescue StandardError => e

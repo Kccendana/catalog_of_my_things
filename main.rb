@@ -1,6 +1,6 @@
 require_relative 'inc_helper'
 
-catalog_management = Catalog_management.new
+catalog_management = CatalogManagement.new
 catalog_management.load_items_from_json('music_albums.json')
 catalog_management.load_genres_from_json('genres.json')
 

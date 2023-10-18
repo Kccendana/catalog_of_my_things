@@ -23,8 +23,8 @@ class Items
   end
 
   def can_be_archived?
-    currentTime = Time.now.year
-    (currentTime - @published_date.year) > 10
+    current_time = Time.now.year
+    (current_time - @published_date.year) > 10
   end
 
   def move_to_archived
