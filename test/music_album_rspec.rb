@@ -1,5 +1,5 @@
 require_relative '../inc_helper'
-RSpec.describe Music_album do
+RSpec.describe MusicAlbum do
   before(:each) do
     @album = Music_album.new('Pop', 'Artist', 'Album Title', 'Spotify', '2010-01-01', true)
   end
