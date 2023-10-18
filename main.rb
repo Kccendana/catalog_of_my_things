@@ -1,6 +1,8 @@
 require_relative 'inc_helper'
 
-catalog_management = Catalog_management.new
+catalog_management = CatalogManagement.new
+
+catalog_management.load_books_from_json('books.json')
 
 menu = Menu.new(catalog_management)
 
