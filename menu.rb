@@ -49,46 +49,39 @@ class Menu
     (1..11).include?(choice)
   end
 
-  def add_music_album
-    puts "\nAdding Music Album"
-    print 'Enter the Genre name: '
-    genre_name = gets.chomp
-    genre = @catalog_management.genres.find { |g| g.name == genre_name }
-    if genre.nil?
-      genre = Genres.new(genre_name)
-      @catalog_management.add_genre(genre)
-    end
+  # def add_music_album
+  #   puts "\nAdding Music Album"
 
-    print 'Enter the author: '
-    author = gets.chomp
-    print 'Enter the label: '
-    label = gets.chomp
-    print 'Enter the source: '
-    source = gets.chomp
-    print 'Enter the published date: '
-    published_date = gets.chomp
-    print 'Is it on Spotify? (true/false): '
-    on_spotify = gets.chomp.downcase == 'true'
+  #   print 'Enter the author: '
+  #   author = gets.chomp
+  #   print 'Enter the label: '
+  #   label = gets.chomp
+  #   print 'Enter the source: '
+  #   source = gets.chomp
+  #   print 'Enter the published date: '
+  #   published_date = gets.chomp
+  #   print 'Is it on Spotify? (true/false): '
+  #   on_spotify = gets.chomp.downcase == 'true'
 
-    music_album = Music_album.new(genre, author, label, source, published_date, on_spotify)
-    @catalog_management.add_music_album(music_album)
+  #   music_album = Music_album.new(genre, author, label, source, published_date, on_spotify)
+  #   @catalog_management.add_music_album(music_album)
 
-    puts "\n#{GREEN}Music Album added successfully!"
-  end
+  #   puts "\n#{GREEN}Music Album added successfully!"
+  # end
 
-  def add_genre
-    puts "\nAdding a Genre"
-    print 'Enter the name of the Genre: '
-    genre_name = gets.chomp
+  # def add_genre
+  #   puts "\nAdding a Genre"
+  #   print 'Enter the name of the Genre: '
+  #   genre_name = gets.chomp
 
-    if @catalog_management.genres.any? { |g| g.name == genre_name }
-      puts "#{RED} Genre #{genre_name} is already exist."
-    else
-      genre = Genres.new(genre_name)
-      @catalog_management.add_genre(genre)
-      puts "\n #{GREEN} Genres is successfuly created !."
-    end
-  end
+  #   if @catalog_management.genres.any? { |g| g.name == genre_name }
+  #     puts "#{RED} Genre #{genre_name} is already exist."
+  #   else
+  #     genre = Genres.new(genre_name)
+  #     @catalog_management.add_genre(genre)
+  #     puts "\n #{GREEN} Genres is successfuly created !."
+  #   end
+  # end
 
   def list_all_genres
     @catalog_management.genres.each do |genres|
@@ -114,24 +107,9 @@ class Menu
 
   def add_book
     puts "\nAdding Books"
-    genre_name = add_genre_name
-    genre = @catalog_management.genres.find { |g| g.name == genre_name }
-    if genre.nil?
-      genre = Genres.new(genre_name)
-      @catalog_management.add_genre(genre)
-    end
-
-    author = add_author
-    title = add_label
-    color = add_color
-    source = add_source
-    publisher = add_publisher
     published_date = date_of_publish
     cover_state = add_cover_state
-    label = Label.new(title, color)
-    book_params = Book::BookParams.new(genre, author, title, source, publisher, published_date, cover_state)
-    book = Book.new(book_params)
-    @catalog_management.add_label(label)
+    book = Book.new(published_date, cover_state)
     @catalog_management.add_book(book)
 
     puts "\n#{GREEN} Book added successfully!"

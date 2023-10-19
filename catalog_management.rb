@@ -16,8 +16,8 @@ class CatalogManagement
   end
 
   def add_book(book)
-    @items << book
-    save_books
+    @books << book
+    write_book(@books)
   end
 
   def add_genre(genre)
@@ -90,6 +90,23 @@ class CatalogManagement
     rescue StandardError => e
       puts "Failed to save Genres to #{filename}: #{e.message}"
     end
+  end
+
+  def write_book(books)
+    file = File.open('books.json', 'w+')
+
+    book_hash = {}
+    books.each_with_index do |book, index|
+      book_hash[(index + 1).to_s] =
+        { 'id' => book.id,
+          'genre' => book.genre || nil,
+          'author' => book.author || nil,
+          'source' => book.source || nil,
+          'published_date' => book.published_date.to_s || nil,
+          'cover_state' => book.cover_state,
+          'archived' => book.archived }
+    end
+    file.write(JSON.pretty_generate(book_hash))
   end
 
   def save_books

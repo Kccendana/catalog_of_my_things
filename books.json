@@ -1,35 +1,11 @@
-[
-  {
-    "id": 494,
-    "genre": "#<Genres:0x0000024e190e69b0>",
-    "author": "RES",
-    "label": "RE",
-    "source": "Yours",
-    "publisher": "2020-02-2",
-    "published_date": "2020-02-20",
-    "cover_state": "bad",
-    "can_be_archived": false
-  },
-  {
-    "id": 769,
-    "genre": "#<Genres:0x0000024e190bf658>",
-    "author": "skls",
-    "label": "ksls",
-    "source": "slsk",
-    "publisher": "ksld",
-    "published_date": "1212-12-12",
+{
+  "1": {
+    "id": 390,
+    "genre": null,
+    "author": null,
+    "source": null,
+    "published_date": "2022-12-15",
     "cover_state": "good",
-    "can_be_archived": false
-  },
-  {
-    "id": 269,
-    "genre": "ajkja",
-    "author": "kajsk",
-    "label": "hajhs",
-    "source": "jahsj",
-    "publisher": "jhsj",
-    "published_date": "1212-11-15",
-    "cover_state": "bad",
-    "can_be_archived": true
+    "archived": false
   }
-]
+}
