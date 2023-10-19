@@ -1,14 +1,11 @@
 require_relative '../inc_helper'
 RSpec.describe MusicAlbum do
   before(:each) do
-    @album = Music_album.new('Pop', 'Artist', 'Album Title', 'Spotify', '2010-01-01', true)
+    @album = MusicAlbum.new('Pop', '2010-01-01', true)
   end
 
   it 'Have initial state' do
     expect(@album.genre).to eq('Pop')
-    expect(@album.author).to eq('Artist')
-    expect(@album.lebel).to eq('Album Title')
-    expect(@album.source).to eq('Spotify')
     expect(@album.published_date).to be_a(Date)
     expect(@album.on_spotify).to be_truthy
     expect(@album.archived).to be_falsey

@@ -1,16 +1,11 @@
-require_relative 'inc_helper'
+require_relative '../inc_helper'
 
 RSpec.describe Items do
   before(:each) do
-    @items = Items.new('Action', 'Bahati', 'Land of HomeLess', 'Netflix', '2010-10-11')
+    @items = Items.new('2010-10-11')
   end
 
   it 'Have initial state' do
-    expect(@items.id).to be_a(Integer)
-    expect(@items.genre).to eq('Action')
-    expect(@items.author).to eq('Bahati')
-    expect(@items.lebel).to eq('Land of HomeLess')
-    expect(@items.source).to eq('Netflix')
     expect(@items.published_date).to be_a(Date)
     expect(@items.archived).to be_falsey
   end

@@ -52,37 +52,28 @@ class Menu
     puts "\nAdding Music Album"
     genre_name = use_genre_name
     genre = @catalog_management.genres.find { |g| g.name == genre_name }
-
     if genre.nil?
-      puts "\n#{RED}Genre does not exist, create it first before adding a music album."
-    else
-      author, label, source, published_date, on_spotify = use_music_album_details
-      music_album = MusicAlbum.new(MusicAlbum::MusicAlbumParams.new(genre, author, label, source, published_date,
-                                                                    on_spotify))
-      @catalog_management.add_music_album(music_album)
-      @catalog_management.save_items_to_json('music_albums.json')
-      puts "\n#{GREEN}Music Album added successfully!"
+      puts "\n#{RED}Genre does not exist, creating it before adding a music album."
+      genre = Genres.new(genre_name)
+      @catalog_management.add_genre(genre)
+      @catalog_management.save_genres_to_json('genres.json')
+      puts "\n#{GREEN}Genre #{genre_name} created successfully."
     end
+
+    print 'Enter the published date: '
+    published_date = gets.chomp
+    print 'Is it on Spotify? (true/false): '
+    on_spotify_input = gets.chomp.downcase
+    on_spotify = on_spotify_input == 'true'
+    music_album = MusicAlbum.new(genre, published_date, on_spotify)
+    @catalog_management.add_music_album(music_album)
+    @catalog_management.save_items_to_json('music_albums.json')
+    puts "\n#{GREEN}Music Album added successfully!"
   end
 
   def use_genre_name
     print 'Enter the Genre name: '
     gets.chomp
-  end
-
-  def use_music_album_details
-    print 'Enter the author: '
-    author = gets.chomp
-    print 'Enter the label: '
-    label = gets.chomp
-    print 'Enter the source: '
-    source = gets.chomp
-    print 'Enter the published date: '
-    published_date = gets.chomp
-    print 'Is it on Spotify? (true/false): '
-    on_spotify = gets.chomp.downcase == 'true'
-
-    [author, label, source, published_date, on_spotify]
   end
 
   def add_genre
@@ -114,11 +105,7 @@ class Menu
       puts 'No music albums in the catalog.'
     else
       @catalog_management.items.each_with_index do |music_album, index|
-        puts "#{index + 1}. Title: #{music_album.label}"
-        puts "   Genre: #{music_album.genre.name}"
-        puts "   Author: #{music_album.author}"
-        puts "   Source: #{music_album.source}"
-        puts "   Published Date: #{music_album.published_date}"
+        puts "#{index + 1}. Published Date: #{music_album.published_date}"
         puts "   On Spotify: #{music_album.on_spotify ? 'Yes' : 'No'}"
       end
     end
