@@ -15,7 +15,7 @@ class Book < Items
 
   def to_hash
     { 'id' => @id,
-      'genre' => @genre,
+      'genre' => @genre.name,
       'author' => @author,
       'label' => @label,
       'source' => @source,
@@ -28,13 +28,13 @@ class Book < Items
   def self.from_json(json_str)
     data = JSON.parse(json_str)
     genre = Genres.new(data['genre'])
-    new(genre,
-        data['author'],
-        data['label'],
-        data['source'],
-        data['publisher'],
-        data['published_date'],
-        data['cover_state'])
+    new(BookParams.new(genre,
+                       data['author'],
+                       data['label'],
+                       data['source'],
+                       data['publisher'],
+                       data['published_date'],
+                       data['cover_state']))
   end
 
   def can_be_archived?
