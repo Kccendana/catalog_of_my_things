@@ -105,7 +105,8 @@ class Menu
       puts 'No music albums in the catalog.'
     else
       @catalog_management.items.each_with_index do |music_album, index|
-        puts "#{index + 1}. Published Date: #{music_album.published_date}"
+        puts "#{index + 1}. Genre Name: #{music_album.genre.name}"
+        puts "   Published Date: #{music_album.published_date}"
         puts "   On Spotify: #{music_album.on_spotify ? 'Yes' : 'No'}"
       end
     end
