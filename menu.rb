@@ -76,7 +76,6 @@ class Menu
     gets.chomp
   end
 
-
   def add_genre
     puts "\nAdding a Genre"
     print 'Enter the name of the Genre: '
