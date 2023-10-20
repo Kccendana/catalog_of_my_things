@@ -1,11 +1,9 @@
-{
-  "1": {
-    "id": 390,
-    "genre": null,
-    "author": null,
-    "source": null,
-    "published_date": "2022-12-15",
+[
+  {
+    "id": 502,
+    "label": "Kathy",
+    "published_date": "2022-12-14",
     "cover_state": "good",
-    "archived": false
+    "can_be_archived": false
   }
-}
+]
