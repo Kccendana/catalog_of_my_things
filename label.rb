@@ -5,6 +5,7 @@ class Label
   attr_reader :id, :items
 
   def initialize(title, color)
+    @id = Random.rand(1..10_000)
     @title = title
     @color = color
     @items = []
@@ -19,23 +20,16 @@ class Label
     end
   end
 
+  def to_hash
+    {
+      'id' => @id,
+      'title' => @title,
+      'color' => @color
+    }
+  end
+
   def self.from_json(json_str)
     data = JSON.parse(json_str)
-    label = new(data['title'])
-    data['items'].each do |item_data|
-      item = Items.from_json(item_data)
-      label.add_item(item)
-    end
-    label
+    new(data['title'], data['color'])
   end
 end
-
-# Assuming you have a label instance
-label = Label.new('Fantasy', 'Blue')
-
-# Create an Item (assuming Item is a subclass of Items)
-item = Items.new('2023-01-15')
-item.label = label
-
-# Add the Item to the Label
-label.add_item(item)
