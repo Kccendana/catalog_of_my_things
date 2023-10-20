@@ -4,6 +4,9 @@ catalog_management = CatalogManagement.new
 
 catalog_management.load_books_from_json('books.json')
 catalog_management.load_label_from_json('labels.json')
+catalog_management.load_items_from_json('music_albums.json')
+catalog_management.load_genres_from_json('genres.json')
+
 
 menu = Menu.new(catalog_management)
 

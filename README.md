@@ -38,7 +38,7 @@ Catalog Of My Things is Ruby console App used with OOP that can keep records of 
 
 ### Key Features <a name="key-features"></a>
 
-- Built methods using Ruby classes
+- Built methods using Ruby OOP(Object oriented programming)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -61,6 +61,17 @@ Catalog Of My Things is Ruby console App used with OOP that can keep records of 
 
    ```bash
    cd catalog_of_my_things
+   ```
+3. Run this command to start application in command Prompt:
+
+   ```bash
+    ruby main.rb
+   ```
+5. For test run go to the test fold:
+
+   ```bash
+    cd test
+    rspec filename
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

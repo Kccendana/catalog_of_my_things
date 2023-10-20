@@ -2,6 +2,7 @@ require_relative 'inc_helper'
 
 class Menu
   include AddItemDetails
+  
   # Customization of console color
   RED = "\e[31m".freeze
   GREEN = "\e[32m".freeze
@@ -21,6 +22,7 @@ class Menu
     4 => { label: 'list all source', action: :list_all_sources },
     5 => { label: 'list all genres', action: :list_all_genres },
     6 => { label: 'list all authors ', action: :list_all_authors },
+
     7 => { label: 'list all labels ', action: :list_all_labels },
     8 => { label: 'add book ', action: :add_book },
     9 => { label: 'add music Album ', action: :add_music_album },
@@ -28,10 +30,11 @@ class Menu
     11 => { label: 'add genre ', action: :add_genre },
     12 => { label: 'add labels ', action: :add_label },
     13 => { label: 'Quit ', action: :quit }
+
   }.freeze
 
   def display_menu
-    puts "\n #{CYAN}Catalog of my Things: "
+    puts "\n#{CYAN}Catalog of my Things:"
     MENU_OPTIONS.each do |key, value|
       puts "#{YELLOW} #{key}. #{value[:label]}"
     end
@@ -43,7 +46,7 @@ class Menu
       action = MENU_OPTIONS[choice][:action]
       send(action)
     else
-      puts "\nInnvalid choice, Please try again !."
+      puts "\nInvalid choice, Please try again!"
     end
   end
 
@@ -51,22 +54,65 @@ class Menu
     (1..13).include?(choice)
   end
 
+  def add_music_album
+    puts "\nAdding Music Album"
+    genre_name = use_genre_name
+    genre = @catalog_management.genres.find { |g| g.name == genre_name }
+    if genre.nil?
+      puts "\n#{RED}Genre does not exist, creating it before adding a music album."
+      genre = Genres.new(genre_name)
+      @catalog_management.add_genre(genre)
+      @catalog_management.save_genres_to_json('genres.json')
+      puts "\n#{GREEN}Genre #{genre_name} created successfully."
+    end
+
+    print 'Enter the published date: '
+    published_date = gets.chomp
+    print 'Is it on Spotify? (true/false): '
+    on_spotify_input = gets.chomp.downcase
+    on_spotify = on_spotify_input == 'true'
+    music_album = MusicAlbum.new(genre, published_date, on_spotify)
+    @catalog_management.add_music_album(music_album)
+    @catalog_management.save_items_to_json('music_albums.json')
+    puts "\n#{GREEN}Music Album added successfully!"
+  end
+
+  def use_genre_name
+    print 'Enter the Genre name: '
+    gets.chomp
+  end
+
+  def add_genre
+    puts "\nAdding a Genre"
+    print 'Enter the name of the Genre: '
+    genre_name = gets.chomp
+
+    if @catalog_management.genres.any? { |g| g.name == genre_name }
+      puts "#{RED} Genre #{genre_name} is already exist."
+    else
+      genre = Genres.new(genre_name)
+      @catalog_management.add_genre(genre)
+
+      @catalog_management.save_genres_to_json('genres.json')
+      puts "\n #{GREEN} Genres are successfully created!"
+    end
+
+  end
+
   def list_all_genres
+    puts "\n#{MAGENTA}List of All Genres:"
     @catalog_management.genres.each do |genres|
       puts "ID: #{genres.id}, Name: #{genres.name}"
     end
   end
 
   def list_all_music_albums
-    puts "\nList of All Music Albums:"
+    puts "\n#{MAGENTA}List of All Music Albums:"
     if @catalog_management.items.empty?
       puts 'No music albums in the catalog.'
     else
       @catalog_management.items.each_with_index do |music_album, index|
-        puts "#{index + 1}. Title: #{music_album.label}"
-        puts "   Genre: #{music_album.genre.name}"
-        puts "   Author: #{music_album.author}"
-        puts "   Source: #{music_album.source}"
+        puts "#{index + 1}. Genre Name: #{music_album.genre.name}"
         puts "   Published Date: #{music_album.published_date}"
         puts "   On Spotify: #{music_album.on_spotify ? 'Yes' : 'No'}"
       end
@@ -138,7 +184,7 @@ class Menu
   end
 
   def quit
-    puts "\n#{RED}Thank you visiting Catalog, Good bye.."
+    puts "\n#{RED}Thank you for visiting Catalog. Goodbye!"
     exit
   end
 end

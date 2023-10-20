@@ -2,6 +2,7 @@ require_relative 'inc_helper'
 class CatalogManagement
   attr_accessor :items, :genres, :books, :labels
 
+
   def initialize
     @items = []
     @genres = []
@@ -22,6 +23,7 @@ class CatalogManagement
     @genres << genre
   end
 
+
   def add_label(label)
     @labels << label
     save_label
@@ -33,7 +35,7 @@ class CatalogManagement
         json_data = File.read(filename)
         data = JSON.parse(json_data, symbolize_names: true)
         data.each do |item_data|
-          music_album = MusicAlbum.from_json(item_data.to_json)
+          music_album = MusicAlbum.from_json(item_data.to_json) # Pass a JSON string as an argument
           @items << music_album
         end
       rescue StandardError => e
@@ -90,7 +92,7 @@ class CatalogManagement
       puts "Failed to save Genres to #{filename}: #{e.message}"
     end
   end
-
+  
   def save_books
     books_hashes = @books.map(&:to_hash)
     books_json = JSON.pretty_generate(books_hashes)
@@ -138,4 +140,5 @@ class CatalogManagement
       File.write(filename, '[]')
     end
   end
+
 end

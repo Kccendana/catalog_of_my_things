@@ -3,7 +3,7 @@ require_relative '../inc_helper'
 RSpec.describe Genres do
   before(:each) do
     @genre = Genres.new('Action')
-    @item = Items.new('Action', 'Bahati', 'Land of HomeLess', 'Netflix', '2010-10-11')
+    @item = Items.new('2010-10-11')
     @genre.add_item(@item)
   end
 

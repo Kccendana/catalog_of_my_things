@@ -1,7 +1,9 @@
 require_relative 'inc_helper'
 
+
 class Items
   attr_accessor :genre, :author, :source, :label, :published_date
+
   attr_reader :id, :archived
 
   def initialize(published_date)
