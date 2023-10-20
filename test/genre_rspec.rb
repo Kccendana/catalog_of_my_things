@@ -16,4 +16,11 @@ RSpec.describe Genres do
   it 'Should be associated with an item' do
     expect(@item.genre).to eq(@genre)
   end
+
+  it 'Can add an item to the genre' do
+    new_item = Items.new('2022-01-01')
+    @genre.add_item(new_item)
+    expect(@genre.items).to include(new_item)
+    expect(new_item.genre).to eq(@genre)
+  end
 end

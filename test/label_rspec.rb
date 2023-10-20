@@ -20,4 +20,10 @@ RSpec.describe Label do
     expect(new_label.title).to eq('JSON Label')
     expect(new_label.color).to eq('Green')
   end
+
+  it 'can add an item to the label' do
+    new_item = Items.new('2022-01-01')
+    @label.add_item(new_item)
+    expect(@label.items).to include(new_item)
+  end
 end

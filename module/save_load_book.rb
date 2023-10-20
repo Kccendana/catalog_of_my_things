@@ -13,9 +13,10 @@ module SaveLoadBook
       puts "\nLabel added successfully!"
       title = new_label.title
     end
+    publisher = add_publisher
     published_date = date_of_publish
     cover_state = add_cover_state
-    book = Book.new(title, published_date, cover_state)
+    book = Book.new(title, publisher, published_date, cover_state)
     @catalog_management.add_book(book)
     @catalog_management.save_books
     puts "\n Book added successfully!"
@@ -27,7 +28,8 @@ module SaveLoadBook
       puts 'No book in the catalog.'
     else
       @catalog_management.books.each_with_index do |book, index|
-        puts "#{index + 1}. Book Title : #{book.label}" # Display the label's title
+        puts "#{index + 1}. Book Title : #{book.label}"
+        puts "   Publisher Name : #{book.publisher}"
         puts "   Published Date : #{book.published_date}"
         puts "   Cover State: #{book.cover_state}"
         puts "   Can be archived: #{book.archived}"

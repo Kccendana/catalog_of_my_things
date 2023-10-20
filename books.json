@@ -1,30 +1,18 @@
 [
   {
-    "id": 545,
-    "label": "Kathy",
-    "published_date": "2022-12-14",
-    "cover_state": "good",
-    "can_be_archived": false
-  },
-  {
-    "id": 980,
-    "label": "John and Ryuuji",
-    "published_date": "1212-12-14",
-    "cover_state": "bad",
-    "can_be_archived": true
-  },
-  {
-    "id": 228,
-    "label": "Home",
-    "published_date": "2002-10-2",
-    "cover_state": "bad",
-    "can_be_archived": true
-  },
-  {
-    "id": 202,
-    "label": "HEL",
+    "id": 14,
+    "label": "New life",
+    "publisher": "John Doe",
     "published_date": "2020-02-1",
     "cover_state": "bad",
     "can_be_archived": true
+  },
+  {
+    "id": 181,
+    "label": "Day and night",
+    "publisher": "Mark Dean",
+    "published_date": "2002-02-2",
+    "cover_state": "good",
+    "can_be_archived": false
   }
 ]
