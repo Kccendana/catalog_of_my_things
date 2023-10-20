@@ -1,9 +1,16 @@
 [
   {
-    "id": 502,
+    "id": 389,
     "label": "Kathy",
     "published_date": "2022-12-14",
     "cover_state": "good",
     "can_be_archived": false
+  },
+  {
+    "id": 448,
+    "label": "John and Ryuuji",
+    "published_date": "1212-12-14",
+    "cover_state": "bad",
+    "can_be_archived": true
   }
 ]

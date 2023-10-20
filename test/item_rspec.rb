@@ -6,7 +6,6 @@ RSpec.describe Items do
   end
 
   it 'Have initial state' do
-
     expect(@items.published_date).to be_a(Date)
     expect(@items.archived).to be_falsey
   end

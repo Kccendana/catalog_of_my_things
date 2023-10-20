@@ -27,5 +27,4 @@ class MusicAlbum < Items
     genre = Genres.new(data['genre'])
     new(genre, data['published_date'], data['on_spotify'])
   end
-
 end

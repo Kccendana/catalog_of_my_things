@@ -2,7 +2,8 @@ require_relative 'inc_helper'
 
 class Menu
   include AddItemDetails
-  
+  include SaveLoadBook
+
   # Customization of console color
   RED = "\e[31m".freeze
   GREEN = "\e[32m".freeze
@@ -96,7 +97,6 @@ class Menu
       @catalog_management.save_genres_to_json('genres.json')
       puts "\n #{GREEN} Genres are successfully created!"
     end
-
   end
 
   def list_all_genres
@@ -119,28 +119,6 @@ class Menu
     end
   end
 
-  def add_book
-    puts "\nAdding Books"
-    print 'Enter Label title :'
-    title = gets.chomp
-    label_title = @catalog_management.labels.find { |label| label.title == title }
-    if label_title.nil?
-      print 'Enter the Label Color: '
-      color = gets.chomp
-      new_label = Label.new(title, color)
-      @catalog_management.add_label(new_label)
-      @catalog_management.save_label
-      puts "\n#{GREEN} Label added successfully!"
-      title = new_label.title
-    end
-    published_date = date_of_publish
-    cover_state = add_cover_state
-    book = Book.new(title, published_date, cover_state)
-    @catalog_management.add_book(book)
-    @catalog_management.save_books
-    puts "\n#{GREEN} Book added successfully!"
-  end
-
   def add_label
     puts "\nAdding label"
     print 'Enter title : '
@@ -154,20 +132,6 @@ class Menu
       @catalog_management.add_label(label)
       @catalog_management.save_label
       puts "\n#{GREEN} Label added successfully!"
-    end
-  end
-
-  def list_all_books
-    puts "\nList of All Books:"
-    if @catalog_management.books.empty?
-      puts 'No book in the catalog.'
-    else
-      @catalog_management.books.each_with_index do |book, index|
-        puts "#{index + 1}. Book Title : #{book.label}" # Display the label's title
-        puts "   Published Date : #{book.published_date}"
-        puts "   Cover State: #{book.cover_state}"
-        puts "   Can be archived: #{book.archived}"
-      end
     end
   end
 

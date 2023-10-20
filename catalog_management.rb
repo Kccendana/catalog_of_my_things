@@ -23,7 +23,6 @@ class CatalogManagement
     @genres << genre
   end
 
-
   def add_label(label)
     @labels << label
     save_label
@@ -92,7 +91,7 @@ class CatalogManagement
       puts "Failed to save Genres to #{filename}: #{e.message}"
     end
   end
-  
+
   def save_books
     books_hashes = @books.map(&:to_hash)
     books_json = JSON.pretty_generate(books_hashes)
@@ -140,5 +139,4 @@ class CatalogManagement
       File.write(filename, '[]')
     end
   end
-
 end
