@@ -10,7 +10,7 @@ module AddItemDetails
   end
 
   def date_of_publish
-    print 'Enter the published date: '
+    print 'Enter the published date[20012-12-12]: '
     gets.chomp
   end
 
@@ -25,7 +25,7 @@ module AddItemDetails
   end
 
   def add_label
-    print 'Enter the label: '
+    print 'Enter the title: '
     gets.chomp
   end
 
