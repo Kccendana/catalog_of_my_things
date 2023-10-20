@@ -2,7 +2,6 @@ require_relative 'inc_helper'
 class CatalogManagement
   attr_accessor :items, :genres, :books, :labels
 
-
   def initialize
     @items = []
     @genres = []
