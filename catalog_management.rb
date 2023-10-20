@@ -1,6 +1,4 @@
 require_relative 'inc_helper'
-require 'json'
-
 class CatalogManagement
   attr_accessor :items, :genres, :books, :labels
 
@@ -17,7 +15,7 @@ class CatalogManagement
 
   def add_book(book)
     @books << book
-    write_book(@books)
+    save_books
   end
 
   def add_genre(genre)
@@ -26,6 +24,7 @@ class CatalogManagement
 
   def add_label(label)
     @labels << label
+    save_label
   end
 
   def load_items_from_json(filename)
@@ -92,27 +91,16 @@ class CatalogManagement
     end
   end
 
-  def write_book(books)
-    file = File.open('books.json', 'w+')
-
-    book_hash = {}
-    books.each_with_index do |book, index|
-      book_hash[(index + 1).to_s] =
-        { 'id' => book.id,
-          'genre' => book.genre || nil,
-          'author' => book.author || nil,
-          'source' => book.source || nil,
-          'published_date' => book.published_date.to_s || nil,
-          'cover_state' => book.cover_state,
-          'archived' => book.archived }
-    end
-    file.write(JSON.pretty_generate(book_hash))
-  end
-
   def save_books
-    books_hashes = @items.map(&:to_hash)
+    books_hashes = @books.map(&:to_hash)
     books_json = JSON.pretty_generate(books_hashes)
     File.write('books.json', books_json)
+  end
+
+  def save_label
+    label_hashes = @labels.map(&:to_hash)
+    label_json = JSON.pretty_generate(label_hashes)
+    File.write('labels.json', label_json)
   end
 
   def load_books_from_json(filename)
@@ -122,7 +110,7 @@ class CatalogManagement
         data = JSON.parse(json_data, symbolize_names: true)
         data.each do |item_data|
           books = Book.from_json(item_data.to_json)
-          @items << books
+          @books << books
         end
       rescue StandardError => e
         puts "Failed to load data from #{filename}: #{e.message}"
@@ -140,7 +128,7 @@ class CatalogManagement
         data = JSON.parse(json_data, symbolize_names: true)
         data.each do |genre_data|
           label = Label.from_json(genre_data.to_json)
-          @genres << label
+          @labels << label
         end
       rescue StandardError => e
         puts "Failed to load data from #{filename}: #{e.message}"
