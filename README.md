@@ -6,6 +6,7 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
+  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -39,6 +40,13 @@ Catalog Of My Things is Ruby console App used with OOP that can keep records of 
 ### Key Features <a name="key-features"></a>
 
 - Built methods using Ruby OOP(Object oriented programming)
+
+## 🚀💻 Video Presentation <a name="live-demo"></a>
+
+ [Video Presentation](https://drive.google.com/file/d/1UK-VH0knX5Ao--2zQwLXuqCIie0daD1N/view?usp=sharing)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
