@@ -1,8 +1,9 @@
 require_relative 'inc_helper'
-
 class Menu
   include GameAuthor
-  
+  include SaveLoadBook
+  include AddItemDetails
+
   def initialize(catalog_management)
     @catalog_management = catalog_management
   end
@@ -110,12 +111,12 @@ class Menu
   end
 
   def use_author_fname
-    print 'Enter the First name: '
+    print 'Enter Author First name: '
     gets.chomp
   end
 
   def use_author_lname
-    print 'Enter the Last name: '
+    print 'Enter Author Last name: '
     gets.chomp
   end
 

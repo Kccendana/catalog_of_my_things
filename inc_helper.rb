@@ -1,5 +1,6 @@
 require_relative 'module/add_item_info'
 require_relative 'module/save_load_book'
+require_relative 'module/save_load_games'
 require 'date'
 require 'json'
 require_relative 'item_class'
@@ -11,5 +12,4 @@ require_relative 'menu'
 require_relative 'genres'
 require_relative 'book'
 require_relative 'label'
-
 require_relative 'music_album'

@@ -1,6 +1,7 @@
 require_relative 'inc_helper'
 class CatalogManagement
   include SaveLoadBook
+  include SaveLoadGames
   attr_accessor :items, :genres, :games, :authors, :books, :labels
 
   def initialize
