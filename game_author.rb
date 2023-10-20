@@ -1,4 +1,11 @@
 module GameAuthor
+  RED = "\e[31m".freeze
+  GREEN = "\e[32m".freeze
+  YELLOW = "\e[33m".freeze
+  BLUE = "\e[34m".freeze
+  MAGENTA = "\e[35m".freeze
+  CYAN = "\e[36m".freeze
+
   def add_author
     puts "\nAdding a Author"
     print 'Enter the First name: '

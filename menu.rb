@@ -2,14 +2,6 @@ require_relative 'inc_helper'
 
 class Menu
   include GameAuthor
-  # Customization of console color
-  RED = "\e[31m".freeze
-  GREEN = "\e[32m".freeze
-  YELLOW = "\e[33m".freeze
-  BLUE = "\e[34m".freeze
-  MAGENTA = "\e[35m".freeze
-  CYAN = "\e[36m".freeze
-
   def initialize(catalog_management)
     @catalog_management = catalog_management
   end
