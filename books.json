@@ -1,0 +1,18 @@
+[
+  {
+    "id": 14,
+    "label": "New life",
+    "publisher": "John Doe",
+    "published_date": "2020-02-1",
+    "cover_state": "bad",
+    "can_be_archived": true
+  },
+  {
+    "id": 181,
+    "label": "Day and night",
+    "publisher": "Mark Dean",
+    "published_date": "2002-02-2",
+    "cover_state": "good",
+    "can_be_archived": false
+  }
+]
