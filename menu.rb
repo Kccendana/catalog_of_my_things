@@ -21,11 +21,13 @@ class Menu
     4 => { label: 'list all source', action: :list_all_sources },
     5 => { label: 'list all genres', action: :list_all_genres },
     6 => { label: 'list all authors ', action: :list_all_authors },
-    7 => { label: 'add book ', action: :add_book },
-    8 => { label: 'add music Album ', action: :add_music_album },
-    9 => { label: 'add games ', action: :add_games },
-    10 => { label: 'add genre ', action: :add_genre },
-    11 => { label: 'Quit ', action: :quit }
+    7 => { label: 'list all labels ', action: :list_all_labels },
+    8 => { label: 'add book ', action: :add_book },
+    9 => { label: 'add music Album ', action: :add_music_album },
+    10 => { label: 'add games ', action: :add_games },
+    11 => { label: 'add genre ', action: :add_genre },
+    12 => { label: 'add labels ', action: :add_label },
+    13 => { label: 'Quit ', action: :quit }
   }.freeze
 
   def display_menu
@@ -46,42 +48,8 @@ class Menu
   end
 
   def valid_choice?(choice)
-    (1..11).include?(choice)
+    (1..13).include?(choice)
   end
-
-  # def add_music_album
-  #   puts "\nAdding Music Album"
-
-  #   print 'Enter the author: '
-  #   author = gets.chomp
-  #   print 'Enter the label: '
-  #   label = gets.chomp
-  #   print 'Enter the source: '
-  #   source = gets.chomp
-  #   print 'Enter the published date: '
-  #   published_date = gets.chomp
-  #   print 'Is it on Spotify? (true/false): '
-  #   on_spotify = gets.chomp.downcase == 'true'
-
-  #   music_album = Music_album.new(genre, author, label, source, published_date, on_spotify)
-  #   @catalog_management.add_music_album(music_album)
-
-  #   puts "\n#{GREEN}Music Album added successfully!"
-  # end
-
-  # def add_genre
-  #   puts "\nAdding a Genre"
-  #   print 'Enter the name of the Genre: '
-  #   genre_name = gets.chomp
-
-  #   if @catalog_management.genres.any? { |g| g.name == genre_name }
-  #     puts "#{RED} Genre #{genre_name} is already exist."
-  #   else
-  #     genre = Genres.new(genre_name)
-  #     @catalog_management.add_genre(genre)
-  #     puts "\n #{GREEN} Genres is successfuly created !."
-  #   end
-  # end
 
   def list_all_genres
     @catalog_management.genres.each do |genres|
@@ -107,26 +75,64 @@ class Menu
 
   def add_book
     puts "\nAdding Books"
+    print 'Enter Label title :'
+    title = gets.chomp
+    label_title = @catalog_management.labels.find { |label| label.title == title }
+    if label_title.nil?
+      print 'Enter the Label Color: '
+      color = gets.chomp
+      new_label = Label.new(title, color)
+      @catalog_management.add_label(new_label)
+      @catalog_management.save_label
+      puts "\n#{GREEN} Label added successfully!"
+      title = new_label.title
+    end
     published_date = date_of_publish
     cover_state = add_cover_state
-    book = Book.new(published_date, cover_state)
+    book = Book.new(title, published_date, cover_state)
     @catalog_management.add_book(book)
-
+    @catalog_management.save_books
     puts "\n#{GREEN} Book added successfully!"
+  end
+
+  def add_label
+    puts "\nAdding label"
+    print 'Enter title : '
+    title = gets.chomp
+    print 'Enter label color : '
+    color = gets.chomp
+    if @catalog_management.labels.any? { |label| label.title == title }
+      puts "\n#{RED} Label named #{title} exist!"
+    else
+      label = Label.new(title, color)
+      @catalog_management.add_label(label)
+      @catalog_management.save_label
+      puts "\n#{GREEN} Label added successfully!"
+    end
   end
 
   def list_all_books
     puts "\nList of All Books:"
-    if @catalog_management.items.empty?
+    if @catalog_management.books.empty?
       puts 'No book in the catalog.'
     else
-      @catalog_management.items.each_with_index do |book, index|
-        puts "#{index + 1}. Title: #{book.label}"
-        puts "   Genre: #{book.genre.name}"
-        puts "   Author: #{book.author}"
-        puts "   Source: #{book.source}"
-        puts "   Published Date: #{book.published_date}"
-        puts "   Cover State: #{book.cover_state ? 'Good' : 'Bad'}"
+      @catalog_management.books.each_with_index do |book, index|
+        puts "#{index + 1}. Book Title : #{book.label}" # Display the label's title
+        puts "   Published Date : #{book.published_date}"
+        puts "   Cover State: #{book.cover_state}"
+        puts "   Can be archived: #{book.archived}"
+      end
+    end
+  end
+
+  def list_all_labels
+    puts "\nList of All Labels:"
+    if @catalog_management.labels.empty?
+      puts 'No Label Title in the catalog.'
+    else
+      @catalog_management.labels.each_with_index do |label, index|
+        puts "#{index + 1}. Title: #{label.title}"
+        puts "   Color: #{label.color}"
       end
     end
   end

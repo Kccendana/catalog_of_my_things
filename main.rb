@@ -3,6 +3,7 @@ require_relative 'inc_helper'
 catalog_management = CatalogManagement.new
 
 catalog_management.load_books_from_json('books.json')
+catalog_management.load_label_from_json('labels.json')
 
 menu = Menu.new(catalog_management)
 
@@ -16,5 +17,5 @@ loop do
     puts 'Invalid choice. Please choose a valid option.'
   end
 
-  break if choice == 11
+  break if choice == 13
 end
