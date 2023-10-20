@@ -34,4 +34,40 @@ module SaveLoadBook
       end
     end
   end
+
+  def load_books_from_json(filename)
+    if File.exist?(filename)
+      begin
+        json_data = File.read(filename)
+        data = JSON.parse(json_data, symbolize_names: true)
+        data.each do |item_data|
+          books = Book.from_json(item_data.to_json)
+          @books << books
+        end
+      rescue StandardError => e
+        puts "Failed to load data from #{filename}: #{e.message}"
+      end
+    else
+      puts "File '#{filename}' does not exist. Creating an empty file."
+      File.write(filename, '[]')
+    end
+  end
+
+  def load_label_from_json(filename)
+    if File.exist?(filename)
+      begin
+        json_data = File.read(filename)
+        data = JSON.parse(json_data, symbolize_names: true)
+        data.each do |genre_data|
+          label = Label.from_json(genre_data.to_json)
+          @labels << label
+        end
+      rescue StandardError => e
+        puts "Failed to load data from #{filename}: #{e.message}"
+      end
+    else
+      puts "File '#{filename}' does not exist. Creating an empty file."
+      File.write(filename, '[]')
+    end
+  end
 end
