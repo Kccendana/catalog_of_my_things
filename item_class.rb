@@ -1,13 +1,13 @@
 require_relative 'inc_helper'
+
 class Items
-  attr_accessor :published_date, :genre
+  attr_accessor :genre, :author, :source, :label, :published_date
+
   attr_reader :id, :archived
 
   def initialize(published_date)
-    raise ArgumentError, 'Invalid published date format' unless valid_published_date?(published_date)
-
     @id = Random.rand(1..1000)
-    @published_date = Date.parse(published_date)
+    @published_date = published_date
     @archived = false
   end
 
@@ -19,6 +19,8 @@ class Items
   end
 
   def can_be_archived?
+    return false if valid_published_date?(@published_date)
+
     current_time = Time.now.year
     (current_time - @published_date.year) > 10
   end

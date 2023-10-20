@@ -1,7 +1,9 @@
 require_relative 'inc_helper'
-
 class Menu
   include GameAuthor
+  include SaveLoadBook
+  include AddItemDetails
+
   def initialize(catalog_management)
     @catalog_management = catalog_management
   end
@@ -13,12 +15,13 @@ class Menu
     4 => { label: 'list all source', action: :list_all_sources },
     5 => { label: 'list all genres', action: :list_all_genres },
     6 => { label: 'list all authors ', action: :list_all_authors },
-    7 => { label: 'add book ', action: :add_book },
-    8 => { label: 'add music Album ', action: :add_music_album },
-    9 => { label: 'add games ', action: :add_games },
-    10 => { label: 'add genre ', action: :add_genre },
-    11 => { label: 'add authors ', action: :add_author },
-    12 => { label: 'Quit ', action: :quit }
+    7 => { label: 'list all labels ', action: :list_all_labels },
+    8 => { label: 'add book ', action: :add_book },
+    9 => { label: 'add music Album ', action: :add_music_album },
+    10 => { label: 'add games ', action: :add_games },
+    11 => { label: 'add genre ', action: :add_genre },
+    12 => { label: 'add labels ', action: :add_label },
+    13 => { label: 'Quit ', action: :quit }
   }.freeze
 
   def display_menu
@@ -39,7 +42,7 @@ class Menu
   end
 
   def valid_choice?(choice)
-    (1..12).include?(choice)
+    (1..13).include?(choice)
   end
 
   def add_music_album
@@ -108,12 +111,12 @@ class Menu
   end
 
   def use_author_fname
-    print 'Enter the First name: '
+    print 'Enter Author First name: '
     gets.chomp
   end
 
   def use_author_lname
-    print 'Enter the Last name: '
+    print 'Enter Author Last name: '
     gets.chomp
   end
 
@@ -130,6 +133,34 @@ class Menu
   def use_published_date
     print 'Enter the published date: '
     gets.chomp
+  end
+
+  def add_label
+    puts "\nAdding label"
+    print 'Enter title : '
+    title = gets.chomp
+    print 'Enter label color : '
+    color = gets.chomp
+    if @catalog_management.labels.any? { |label| label.title == title }
+      puts "\n#{RED} Label named #{title} exist!"
+    else
+      label = Label.new(title, color)
+      @catalog_management.add_label(label)
+      @catalog_management.save_label
+      puts "\n#{GREEN} Label added successfully!"
+    end
+  end
+
+  def list_all_labels
+    puts "\nList of All Labels:"
+    if @catalog_management.labels.empty?
+      puts 'No Label Title in the catalog.'
+    else
+      @catalog_management.labels.each_with_index do |label, index|
+        puts "#{index + 1}. Title: #{label.title}"
+        puts "   Color: #{label.color}"
+      end
+    end
   end
 
   def quit

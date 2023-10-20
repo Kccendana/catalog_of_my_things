@@ -1,5 +1,6 @@
 [
-{"id":324,"genre":"H","published_date":"2020-02-02","on_spotify":true},
-{"id":669,"genre":"HipHop","published_date":"2020-10-02","on_spotify":true},
-{"id":893,"genre":"New Life","published_date":"2020-02-02","on_spotify":true}
+{"id":706,"genre":"H","published_date":"2020-02-02","on_spotify":true},
+{"id":607,"genre":"HipHop","published_date":"2020-10-02","on_spotify":true},
+{"id":880,"genre":"HipHop","published_date":"2020-02-2","on_spotify":true},
+{"id":310,"genre":"HipHop","published_date":"2020-02-2","on_spotify":false}
 ]
