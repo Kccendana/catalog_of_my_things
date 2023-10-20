@@ -8,11 +8,6 @@ class Items
     raise ArgumentError, 'Invalid published date format' unless valid_published_date?(published_date)
 
     @id = Random.rand(1..1000)
-    @genre = nil
-    @author = nil
-    @source = nil
-    @label = nil
-    @publisher = nil
     @published_date = Date.parse(published_date)
     @archived = false
   end
@@ -31,15 +26,5 @@ class Items
 
   def move_to_archived
     @archived = can_be_archived?
-  end
-
-  def to_hash
-    if instance_of?(Book)
-      { 'class' => self.class, 'classroom' => @classroom, 'age' => @age, 'name' => @name,
-        'parent_permission' => @parent_permission, 'id' => @id }
-    else
-      { 'class' => self.class, 'specialization' => @specialization, 'age' => @age, 'name' => @name,
-        'parent_permission' => @parent_permission, 'id' => @id }
-    end
   end
 end
