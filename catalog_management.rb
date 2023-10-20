@@ -1,13 +1,15 @@
 require_relative 'inc_helper'
 class CatalogManagement
   include SaveLoadBook
-  attr_accessor :items, :genres, :books, :labels
+  attr_accessor :items, :genres, :games, :authors, :books, :labels
 
   def initialize
     @items = []
     @genres = []
     @labels = []
     @books = []
+    @games = []
+    @authors = []
   end
 
   def add_music_album(music_album)
@@ -26,6 +28,14 @@ class CatalogManagement
   def add_label(label)
     @labels << label
     save_label
+  end
+
+  def add_games(games)
+    @games << games
+  end
+
+  def add_author(author)
+    @authors << author
   end
 
   def load_items_from_json(filename)
@@ -102,5 +112,33 @@ class CatalogManagement
     label_hashes = @labels.map(&:to_hash)
     label_json = JSON.pretty_generate(label_hashes)
     File.write('labels.json', label_json)
+  end
+
+  def save_games_to_json(filename)
+    data = @games.map(&:to_json)
+    begin
+      File.open(filename, 'w') do |file|
+        file.write("[\n")
+        file.write(data.join(",\n"))
+        file.write("\n]")
+      end
+      puts "Games saved to #{filename} successfully."
+    rescue StandardError => e
+      puts "Failed to save Games to #{filename}: #{e.message}"
+    end
+  end
+
+  def save_author_to_json(filename)
+    data = @authors.map(&:to_json)
+    begin
+      File.open(filename, 'w') do |file|
+        file.write("[\n")
+        file.write(data.join(",\n"))
+        file.write("\n]")
+      end
+      puts "Author saved to #{filename} successfully."
+    rescue StandardError => e
+      puts "Failed to save Authors to #{filename}: #{e.message}"
+    end
   end
 end
