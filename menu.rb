@@ -12,16 +12,15 @@ class Menu
     1 => { label: 'List all books', action: :list_all_books },
     2 => { label: 'List all music Album', action: :list_all_music_albums },
     3 => { label: 'list all games', action: :list_all_games },
-    4 => { label: 'list all source', action: :list_all_sources },
-    5 => { label: 'list all genres', action: :list_all_genres },
-    6 => { label: 'list all authors ', action: :list_all_authors },
-    7 => { label: 'list all labels ', action: :list_all_labels },
-    8 => { label: 'add book ', action: :add_book },
-    9 => { label: 'add music Album ', action: :add_music_album },
-    10 => { label: 'add games ', action: :add_games },
-    11 => { label: 'add genre ', action: :add_genre },
-    12 => { label: 'add labels ', action: :add_label },
-    13 => { label: 'Quit ', action: :quit }
+    4 => { label: 'list all genres', action: :list_all_genres },
+    5 => { label: 'list all authors ', action: :list_all_authors },
+    6 => { label: 'list all labels ', action: :list_all_labels },
+    7 => { label: 'add book ', action: :add_book },
+    8 => { label: 'add music Album ', action: :add_music_album },
+    9 => { label: 'add games ', action: :add_games },
+    10 => { label: 'add genre ', action: :add_genre },
+    11 => { label: 'add labels ', action: :add_label },
+    12 => { label: 'Quit ', action: :quit }
   }.freeze
 
   def display_menu
@@ -42,7 +41,7 @@ class Menu
   end
 
   def valid_choice?(choice)
-    (1..13).include?(choice)
+    (1..12).include?(choice)
   end
 
   def add_music_album

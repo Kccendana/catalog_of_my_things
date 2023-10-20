@@ -21,5 +21,5 @@ loop do
     puts 'Invalid choice. Please choose a valid option.'
   end
 
-  break if choice == 13
+  break if choice == 12
 end
