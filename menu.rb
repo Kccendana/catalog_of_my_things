@@ -1,17 +1,8 @@
 require_relative 'inc_helper'
 
 class Menu
-  include AddItemDetails
-  include SaveLoadBook
-
-  # Customization of console color
-  RED = "\e[31m".freeze
-  GREEN = "\e[32m".freeze
-  YELLOW = "\e[33m".freeze
-  BLUE = "\e[34m".freeze
-  MAGENTA = "\e[35m".freeze
-  CYAN = "\e[36m".freeze
-
+  include GameAuthor
+  
   def initialize(catalog_management)
     @catalog_management = catalog_management
   end
@@ -23,7 +14,6 @@ class Menu
     4 => { label: 'list all source', action: :list_all_sources },
     5 => { label: 'list all genres', action: :list_all_genres },
     6 => { label: 'list all authors ', action: :list_all_authors },
-
     7 => { label: 'list all labels ', action: :list_all_labels },
     8 => { label: 'add book ', action: :add_book },
     9 => { label: 'add music Album ', action: :add_music_album },
@@ -31,7 +21,6 @@ class Menu
     11 => { label: 'add genre ', action: :add_genre },
     12 => { label: 'add labels ', action: :add_label },
     13 => { label: 'Quit ', action: :quit }
-
   }.freeze
 
   def display_menu
@@ -99,24 +88,50 @@ class Menu
     end
   end
 
-  def list_all_genres
-    puts "\n#{MAGENTA}List of All Genres:"
-    @catalog_management.genres.each do |genres|
-      puts "ID: #{genres.id}, Name: #{genres.name}"
+  def add_games
+    puts "\nAdding New Game"
+    author_fname = use_author_fname
+    author_lname = use_author_lname
+    author = @catalog_management.authors.find { |a| (a.fname == author_fname && a.lname == author_lname) }
+    if author.nil?
+      puts "\nAuthor does not exist, creating it before adding a Game."
+      author = Authors.new(author_fname, author_lname)
+      @catalog_management.add_author(author)
+      @catalog_management.save_author_to_json('authors.json')
+      puts "\nAuthor #{author_fname}- #{author_lname} created successfully."
     end
+    published_date = use_published_date
+    multiplayer = use_multiplayer
+    last_played_at = use_play_at
+    games = Games.new(author, published_date, multiplayer, last_played_at)
+    @catalog_management.add_games(games)
+    @catalog_management.save_games_to_json('games.json')
+    puts "\nGame added successfully!"
   end
 
-  def list_all_music_albums
-    puts "\n#{MAGENTA}List of All Music Albums:"
-    if @catalog_management.items.empty?
-      puts 'No music albums in the catalog.'
-    else
-      @catalog_management.items.each_with_index do |music_album, index|
-        puts "#{index + 1}. Genre Name: #{music_album.genre.name}"
-        puts "   Published Date: #{music_album.published_date}"
-        puts "   On Spotify: #{music_album.on_spotify ? 'Yes' : 'No'}"
-      end
-    end
+  def use_author_fname
+    print 'Enter the First name: '
+    gets.chomp
+  end
+
+  def use_author_lname
+    print 'Enter the Last name: '
+    gets.chomp
+  end
+
+  def use_multiplayer
+    print 'Is it Multiplayer? (true/false): '
+    gets.chomp.downcase
+  end
+
+  def use_play_at
+    print 'Enter the last played at: '
+    gets.chomp
+  end
+
+  def use_published_date
+    print 'Enter the published date: '
+    gets.chomp
   end
 
   def add_label
